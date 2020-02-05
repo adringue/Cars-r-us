@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 import bcrypt
 from .models import User, Lister,Dates
+import requests
 import json
 
 
@@ -72,7 +73,7 @@ def search(request):
 
         # location
         location= request.POST['location']
-        response = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={location}&key=your api key').json()
+        response = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={location}&key=AIzaSyAIEzXWpn7H78ywKZBQbYr07FROTTe3Nyw').json()
         # y= json.la(response)
         # print(response['results'][0]['geometry']['location']['lat'])
         lat = response['results'][0]['geometry']['location']['lat']
@@ -109,7 +110,7 @@ def registerlister(request):
         address = f"{request.POST['address']} {request.POST['location']}"
 
         print(address)
-        response = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=your api key').json()
+        response = requests.get(f"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyAIEzXWpn7H78ywKZBQbYr07FROTTe3Nyw").json()
         print(response)
         lat = response['results'][0]['geometry']['location']['lat']
         lon =response['results'][0]['geometry']['location']['lng']
